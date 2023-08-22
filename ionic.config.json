@@ -1,0 +1,7 @@
+{
+  "name": "JustinApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
