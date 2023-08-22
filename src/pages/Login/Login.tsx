@@ -1,29 +1,23 @@
 import { IonButton, IonContent, IonHeader, IonImg, IonInput, IonItem, IonLabel, IonPage, IonTitle, IonToolbar, useIonAlert, useIonRouter } from '@ionic/react';
 import './Login.css';
 import IonicBG from '../../assets/images/ionic.jpg'
-import * as firebaseService from "../../services/firebase-service";
 import { useState } from 'react';
 import { FirebaseError } from 'firebase/app';
+import { useAuth } from '../../contexts/auth-context';
 
-const Login: React.FC = (props) => {
+
+const Login: React.FC = () => {
     const router = useIonRouter();
+    const { signIn } = useAuth();
     const alert = useIonAlert()[0];
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const onSubmit = async (evt: any) => {
         evt.preventDefault();
-        // const user = firebaseService.getCurrentUser();
-        // console.log(user);
-
-        // console.log(email)
-        // console.log(password);
-        // const userInfo = await firebaseService.loginWithEmail(email, password);
-        // console.log(userInfo);
-        // router.push('home');
         try {
-            const userInfo = await firebaseService.loginWithEmail(email, password);
-            console.log(userInfo);
+            await signIn(email.trim(), password.trim());
             router.push('home');
         } catch (error) {
             if (error instanceof FirebaseError) {
@@ -35,7 +29,7 @@ const Login: React.FC = (props) => {
                 console.log(error.customData);
                 console.log(error.stack);
                 showAlert(error.message)
-            }else{
+            } else {
                 showAlert(String(error));
             }
         }

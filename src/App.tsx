@@ -3,6 +3,8 @@ import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
+import { AuthProvider, useAuth } from './contexts/auth-context';
+
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -27,20 +29,25 @@ setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
-    <IonReactRouter>
-      <IonRouterOutlet>
-        <Route exact path="/home">
-          <Home />
-        </Route>
-        <Route exact path="/login">
-          <Login />
-        </Route>
-        <Route exact path="/">
-          <Redirect to="/login" />
-        </Route>
-      </IonRouterOutlet>
-    </IonReactRouter>
+    <AuthProvider>
+      <IonReactRouter>
+        <IonRouterOutlet>
+          <Route exact path="/login" >
+            <Login />
+          </Route>
+          <PrivateRoute path="/home" component={Home} />
+          <Redirect exact to="/login" />
+        </IonRouterOutlet>
+      </IonReactRouter>
+    </AuthProvider>
   </IonApp>
 );
+
+
+const PrivateRoute: React.FC<{ path: string; component: React.FC }> = ({ path, component: Component }) => {
+  const { user } = useAuth();
+  console.log(user);
+  return <Route path={path} render={() => (user ? <Component /> : <Redirect to="/login" />)} />;
+};
 
 export default App;
