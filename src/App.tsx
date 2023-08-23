@@ -46,7 +46,6 @@ const App: React.FC = () => (
 
 const PrivateRoute: React.FC<{ path: string; component: React.FC }> = ({ path, component: Component }) => {
   const { user } = useAuth();
-  console.log(user);
   return <Route path={path} render={() => (user ? <Component /> : <Redirect to="/login" />)} />;
 };
 

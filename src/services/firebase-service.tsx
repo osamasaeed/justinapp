@@ -3,19 +3,21 @@ import { collection, doc, getFirestore, setDoc } from "firebase/firestore";
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 var firebaseConfig = {
-    // apiKey: "AIzaSyBX7LcBVQ6YFzq3UCeP_O64__Nf_p7FmjU",
-    // authDomain: "justinapp-11f30.firebaseapp.com",
-    // projectId: "justinapp-11f30",
-    // storageBucket: "justinapp-11f30.appspot.com",
-    // messagingSenderId: "10779002422",
-    // appId: "1:10779002422:web:60c8e7f23a25065684ba97"
-    apiKey: "AIzaSyBUkFth4c1SF99m3XF6FCIj9FysTuctqs8",
-    authDomain: "golf-snap.firebaseapp.com",
-    projectId: "golf-snap",
-    storageBucket: "golf-snap.appspot.com",
-    messagingSenderId: "153076236362",
-    appId: "1:153076236362:web:54ef9e8c4610b6d8e5a6b3",
-    measurementId: "G-TPHBE62KV8"
+    apiKey: "AIzaSyBX7LcBVQ6YFzq3UCeP_O64__Nf_p7FmjU",
+    authDomain: "justinapp-11f30.firebaseapp.com",
+    projectId: "justinapp-11f30",
+    storageBucket: "justinapp-11f30.appspot.com",
+    messagingSenderId: "10779002422",
+    appId: "1:10779002422:web:60c8e7f23a25065684ba97"
+
+    /// Justin Credentials
+    // apiKey: "AIzaSyBUkFth4c1SF99m3XF6FCIj9FysTuctqs8",
+    // authDomain: "golf-snap.firebaseapp.com",
+    // projectId: "golf-snap",
+    // storageBucket: "golf-snap.appspot.com",
+    // messagingSenderId: "153076236362",
+    // appId: "1:153076236362:web:54ef9e8c4610b6d8e5a6b3",
+    // measurementId: "G-TPHBE62KV8"
 };
 
 // Ensure that you do not login twice.
