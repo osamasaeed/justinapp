@@ -1,24 +1,29 @@
 import { IonButton, IonContent, IonHeader, IonImg, IonInput, IonItem, IonLabel, IonPage, IonTitle, IonToolbar, useIonAlert, useIonRouter } from '@ionic/react';
 import './Login.css';
 import IonicBG from '../../assets/images/ionic.jpg'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FirebaseError } from 'firebase/app';
 import { useAuth } from '../../contexts/auth-context';
 
-
 const Login: React.FC = () => {
     const router = useIonRouter();
-    const { signIn } = useAuth();
+    const { user, signIn, signInViaGoogle } = useAuth();
     const alert = useIonAlert()[0];
-
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    useEffect(() => {
+        if (user) {
+            router.push('home');
+        }
+        return () => {
+        }
+    }, [user])
 
     const onSubmit = async (evt: any) => {
         evt.preventDefault();
         try {
             await signIn(email.trim(), password.trim());
-            router.push('home');
         } catch (error) {
             if (error instanceof FirebaseError) {
 
@@ -34,6 +39,14 @@ const Login: React.FC = () => {
             }
         }
 
+    }
+    const signInWithGoogle = async () => {
+        try {
+            const user = await signInViaGoogle();
+            console.log("signInWithGoogle", user)
+        } catch (error) {
+            console.log(error);
+        }
     }
     const _handleInputs = (evt: any, fieldName: string) => {
         const value = evt.detail.value;
@@ -67,7 +80,7 @@ const Login: React.FC = () => {
                     </IonButton>
 
                 </form>
-                <IonButton className="ion-margin-top ion-padding-horizontal" type="button" expand="block">
+                <IonButton onClick={signInWithGoogle} className="ion-margin-top ion-padding-horizontal" type="button" expand="block">
                     Sign in with Google
                 </IonButton>
             </IonContent>

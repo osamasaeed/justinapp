@@ -1,15 +1,25 @@
 import { IonAvatar, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonPage, IonTitle, IonToolbar, useIonRouter } from '@ionic/react';
 import './Home.css';
-import * as firebaseService from "../../services/firebase-service";
 import IonicBG from '../../assets/images/ionic.jpg'
 import { useAuth } from '../../contexts/auth-context';
+import { useEffect } from 'react';
 const Home: React.FC = () => {
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
   const router = useIonRouter();
+
+  useEffect(() => {
+    console.log("user:", user);
+
+    return () => {
+
+    }
+  }, [])
+
+
   const Logout = async () => {
-    await firebaseService.logOut();
-    router.push('login');
+    await signOut();
   }
+
   return (
     <IonPage>
 
@@ -22,10 +32,10 @@ const Home: React.FC = () => {
           <IonImg src={IonicBG} alt='ionic-background'>
           </IonImg>
           <IonAvatar className='userAvatar'>
-            <img alt="Silhouette of a person's head" width={100} height={100} src={user?.photoURL || "https://ionicframework.com/docs/img/demos/avatar.svg"} />
+            <img alt="Silhouette of a person's head" width={100} height={100} src={user?.imageUrl || "https://ionicframework.com/docs/img/demos/avatar.svg"} />
           </IonAvatar>
           <IonCardHeader>
-            <IonCardTitle>Name: {user?.displayName}</IonCardTitle>
+            <IonCardTitle>Name: {user?.name}</IonCardTitle>
           </IonCardHeader>
           <IonCardContent>
             <p>Email: {user?.email}</p>

@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">JustinApp</string>
+    <string name="title_activity_main">JustinApp</string>
+    <string name="package_name">justin.ionic.app</string>
+    <string name="custom_url_scheme">justin.ionic.app</string>
+    <string name="server_client_id">10779002422-vqbkmrec4gcvbkrpggblcgrej4s3l1rk.apps.googleusercontent.com</string>
+</resources>

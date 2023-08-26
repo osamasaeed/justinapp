@@ -1,7 +1,9 @@
 import { getApp, getApps, initializeApp } from "firebase/app";
 import { collection, doc, getFirestore, setDoc } from "firebase/firestore";
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
-
+import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, signInWithCredential, signInWithEmailAndPassword } from "firebase/auth";
+import '@codetrix-studio/capacitor-google-auth';
+import { Plugins } from '@capacitor/core';
+const { GoogleAuth } = Plugins;
 var firebaseConfig = {
     apiKey: "AIzaSyBX7LcBVQ6YFzq3UCeP_O64__Nf_p7FmjU",
     authDomain: "justinapp-11f30.firebaseapp.com",
@@ -71,8 +73,9 @@ export const getCurrentUser = () => {
 /**
  *
  */
-export const logOut = () => {
-    return auth.signOut();
+export const logOut = async () => {
+    await auth.signOut();
+    await GoogleAuth.signOut().then(() => console.log('Signed Out')).catch((e: any) => { console.log('Signed Out') });
 };
 
 /**
@@ -105,6 +108,32 @@ export const registerUser = async (userInfo: userInfo) => {
         console.error('Error writing document: ', error);
     }
 };
+
+export const loginViaGoogle = async () => {
+    try {
+        // if (!(isPlatform('android') || isPlatform('ios'))) {
+        // console.log('isWeb');
+        // GoogleAuth.initialize({
+        //     grantOfflineAccess: true
+        // });
+        // }
+        const user = await GoogleAuth.signIn();
+        if (user) {
+            // Sign in with credential from the Google user.
+            const s = await signInWithCredential(getAuth(app), GoogleAuthProvider.credential(user.authentication.idToken))
+            const access_token = await s.user.getIdToken();
+            console.log("user:", user);
+            console.log("s.user:", s.user);
+            const userInfo = { name: s.user.displayName || user.name || user.givenName + " " + user.familyName, email: user.email, imageUrl: user.imageUrl, uid: s.user.uid };
+
+            return userInfo;
+
+        }
+    } catch (error) {
+        console.log(error);
+        // return error;
+    }
+}
 
 // /**
 //  *
