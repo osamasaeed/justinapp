@@ -40,29 +40,41 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }, []);
     const signIn = async (email: string, password: string) => {
         // Implement your Firebase sign-in logic here
-        const userInfo = await loginWithEmail(email, password);
-        if (!userInfo) return;
-        setUser({
-            uid: userInfo.user.uid,
-            email: userInfo.user.email || '',
-            name: userInfo.user.displayName || '',
-            imageUrl: userInfo.user.photoURL || ''
-        });
-        // After successful sign-in, set user state and persist
-        localStorage.setItem('user', JSON.stringify(userInfo.user));
+        try {
+            console.log("authContext.tsx:start:");
+            const userInfo = await loginWithEmail(email, password);
+            console.log("authContext.tsx:res:",userInfo);
+            if (!userInfo) return;
+            setUser({
+                uid: userInfo.user.uid,
+                email: userInfo.user.email || '',
+                name: userInfo.user.displayName || '',
+                imageUrl: userInfo.user.photoURL || ''
+            });
+            // After successful sign-in, set user state and persist
+            localStorage.setItem('user', JSON.stringify(userInfo.user));
+        } catch (error) {
+            console.log("authContext.tsx:err:",error);
+        }
+      
     };
 
     const signInViaGoogle = async () => {
-        const userInfo: any = await loginViaGoogle();
-        if (!userInfo) return;
-        setUser({
-            uid: userInfo.uid,
-            email: userInfo.email,
-            name: userInfo.name,
-            imageUrl: userInfo.imageUrl
-        });
-        // After successful sign-in, set user state and persist
-        localStorage.setItem('user', JSON.stringify(userInfo));
+        try {
+            const userInfo: any = await loginViaGoogle();
+            if (!userInfo) return;
+            setUser({
+                uid: userInfo.uid,
+                email: userInfo.email,
+                name: userInfo.name,
+                imageUrl: userInfo.imageUrl
+            });
+            // After successful sign-in, set user state and persist
+            localStorage.setItem('user', JSON.stringify(userInfo));
+        } catch (error) {
+            console.log("error:signInViaGoogle:",error);
+        }
+      
     }
 
     const signOut = async () => {

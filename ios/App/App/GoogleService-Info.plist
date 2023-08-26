@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>10779002422-t8c3vnorl6e0lhq2u9m3hcc1bgp3hcqh.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.10779002422-t8c3vnorl6e0lhq2u9m3hcc1bgp3hcqh</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>10779002422-tdfep5b0c2lofsb6d2tuvqfsqed3aurg.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBhHm4cbB8d1fhbnzCfzqJmEBvohcH6YGc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>10779002422</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>justin.ionic.app</string>
+	<key>PROJECT_ID</key>
+	<string>justinapp-11f30</string>
+	<key>STORAGE_BUCKET</key>
+	<string>justinapp-11f30.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:10779002422:ios:751310f392c26df284ba97</string>
+</dict>
+</plist>

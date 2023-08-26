@@ -1,7 +1,7 @@
 import { IonAvatar, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonPage, IonTitle, IonToolbar, useIonRouter } from '@ionic/react';
 import './Home.css';
 import IonicBG from '../../assets/images/ionic.jpg'
-import { useAuth } from '../../contexts/auth-context';
+import { useAuth } from '../../contexts/authContext';
 import { useEffect } from 'react';
 const Home: React.FC = () => {
   const { user, signOut } = useAuth();

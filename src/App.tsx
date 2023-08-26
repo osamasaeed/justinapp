@@ -3,7 +3,7 @@ import { IonApp, IonRouterOutlet, isPlatform, setupIonicReact, useIonRouter } fr
 import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
-import { AuthProvider, useAuth } from './contexts/auth-context';
+import { AuthProvider, useAuth } from './contexts/authContext';
 import { Plugins } from '@capacitor/core';
 // import { GoogleAuth } from "@codetrix-studio/capacitor-google-auth";
 

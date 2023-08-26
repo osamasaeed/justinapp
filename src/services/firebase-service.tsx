@@ -1,6 +1,6 @@
 import { getApp, getApps, initializeApp } from "firebase/app";
 import { collection, doc, getFirestore, setDoc } from "firebase/firestore";
-import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, signInWithCredential, signInWithEmailAndPassword } from "firebase/auth";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, signInWithCredential, signInWithEmailAndPassword,indexedDBLocalPersistence,initializeAuth } from "firebase/auth";
 import '@codetrix-studio/capacitor-google-auth';
 import { Plugins } from '@capacitor/core';
 const { GoogleAuth } = Plugins;
@@ -27,7 +27,13 @@ if (!getApps().length) {
     initializeApp(firebaseConfig);
 }
 
+
 const app = getApp();
+if (Capacitor.isNativePlatform()) {
+    initializeAuth(app, {
+        persistence: indexedDBLocalPersistence
+    });
+}
 const auth = getAuth(app);
 const firestore = getFirestore(app);
 // const firestore = firebase.firestore();
@@ -62,8 +68,14 @@ export const authCheck = async (_handleAuthedUser: CallableFunction) => {
  * @param {*} email
  * @param {*} password
  */
-export const loginWithEmail = (email: string, password: string) => {
-    return signInWithEmailAndPassword(auth, email, password);
+export const loginWithEmail = async (email: string, password: string) => {
+    console.log("loginWithEmail:start");
+   try {
+    return await signInWithEmailAndPassword(auth, email, password);
+   } catch (error) {
+       console.log("loginWithEmail:error:",error);
+   }
+
 };
 
 export const getCurrentUser = () => {
